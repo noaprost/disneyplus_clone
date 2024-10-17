@@ -6,12 +6,18 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 export default function MovieByCategory() {
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [error, setError] = useState(null);
   const [genres, setGenres] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   const fetchMoviesByCategory = async () => {
     try {
@@ -52,6 +58,19 @@ export default function MovieByCategory() {
     console.log(genres);
   }, [genres]);
 
+  const openModal = (movie) => {
+    setSelectedMovie(movie);
+    setModalIsOpen(true);
+    setScrollPosition(window.scrollY)
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setSelectedMovie(null);
+    document.body.style.overflow = "auto";
+    window.scrollTo(0, scrollPosition);
+  };
+
   return (
     <div>
       {error && <p className="text-red-500">{error}</p>}
@@ -75,6 +94,7 @@ export default function MovieByCategory() {
                 <div
                   key={movie.id}
                   className="rounded-lg border-2 border-slate-700 hover:border-white overflow-hidden transition-colors ease-in-out"
+                  onClick={() => openModal(movie)}
                 >
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
@@ -85,6 +105,36 @@ export default function MovieByCategory() {
               </SwiperSlide>
             ))}
           </Swiper>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            className="fixed inset-0 flex items-center justify-center"
+            overlayClassName="fixed inset-0 bg-black bg-opacity-25"
+          >
+            <div
+              onClick={closeModal}
+              className="absolute inset-0 cursor-pointer"
+            />
+            {selectedMovie && (
+              <div className="bg-neutral-900 rounded-xl max-w-xl w-full overflow-hidden z-10">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${selectedMovie.backdrop_path}`}
+                  alt={selectedMovie.title}
+                  className="w-full h-72 bg-center"
+                />
+                <p className="text-neutral-400 px-6 mt-4">
+                  {selectedMovie.release_date}
+                </p>
+                <p className="text-2xl font-bold text-white p-6">
+                  {selectedMovie.title}
+                </p>
+                <p className="text-white px-6 pb-6 text-sm">
+                  평점 : {selectedMovie.vote_average}
+                </p>
+                <p className="text-white px-6 pb-6">{selectedMovie.overview}</p>
+              </div>
+            )}
+          </Modal>
         </div>
       </div>
 
@@ -107,6 +157,7 @@ export default function MovieByCategory() {
                 <div
                   key={movie.id}
                   className="rounded-lg border-2 border-slate-700 hover:border-white overflow-hidden transition-colors ease-in-out"
+                  onClick={() => openModal(movie)}
                 >
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
@@ -117,6 +168,36 @@ export default function MovieByCategory() {
               </SwiperSlide>
             ))}
           </Swiper>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            className="fixed inset-0 flex items-center justify-center"
+            overlayClassName="fixed inset-0 bg-black bg-opacity-25"
+          >
+            <div
+              onClick={closeModal}
+              className="absolute inset-0 cursor-pointer"
+            />
+            {selectedMovie && (
+              <div className="bg-neutral-900 rounded-xl max-w-xl w-full overflow-hidden z-10">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${selectedMovie.backdrop_path}`}
+                  alt={selectedMovie.title}
+                  className="w-full h-72 bg-center"
+                />
+                <p className="text-neutral-400 px-6 mt-4">
+                  {selectedMovie.release_date}
+                </p>
+                <p className="text-2xl font-bold text-white p-6">
+                  {selectedMovie.title}
+                </p>
+                <p className="text-white px-6 pb-6 text-sm">
+                  평점 : {selectedMovie.vote_average}
+                </p>
+                <p className="text-white px-6 pb-6">{selectedMovie.overview}</p>
+              </div>
+            )}
+          </Modal>
         </div>
       </div>
 

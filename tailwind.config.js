@@ -11,6 +11,9 @@ module.exports = {
         124: "28rem",
         128: "32rem",
       },
+      zIndex: {
+        100: "100",
+      },
     },
   },
   plugins: [],

@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -14,9 +21,17 @@ body {
   background-image: url("/public/images/home-background.png");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.ReactModal__Overlay {
+  z-index: 50 !important; /* 모달 오버레이의 z-index를 강제로 설정 */
+}
+.ReactModal__Content {
+  z-index: 50 !important; /* 모달 콘텐츠의 z-index를 강제로 설정 */
 }
