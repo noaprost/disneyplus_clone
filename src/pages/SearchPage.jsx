@@ -44,7 +44,7 @@ export default function SearchPage() {
               movie.backdrop_path && (
                 <div
                   key={movie.id}
-                  className="w-64 h-96 bg-cover bg-no-repeat m-6"
+                  className="w-64 h-96 bg-cover bg-no-repeat m-6 hover:scale-110 transition-transform ease-in-out cursor-pointer"
                   style={{
                     backgroundImage: `url(https://image.tmdb.org/t/p/w780${movie.poster_path})`,
                   }}
