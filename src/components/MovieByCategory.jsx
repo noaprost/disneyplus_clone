@@ -1,14 +1,9 @@
 import axios from "../api/axios";
 import { useEffect, useState } from "react";
 import MovieByGenre from "./MovieByGenre";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper/modules";
-import Modal from "react-modal";
-
-Modal.setAppElement("#root");
+import { SwiperSlide } from "swiper/react";
+import ModalContainer from "./ModalContainer";
+import SwiperContainer from "./SwiperContainer";
 
 export default function MovieByCategory() {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -61,7 +56,7 @@ export default function MovieByCategory() {
   const openModal = (movie) => {
     setSelectedMovie(movie);
     setModalIsOpen(true);
-    setScrollPosition(window.scrollY)
+    setScrollPosition(window.scrollY);
   };
 
   const closeModal = () => {
@@ -80,15 +75,7 @@ export default function MovieByCategory() {
           인기 영화
         </h2>
         <div className="mx-14">
-          <Swiper
-            slidesPerView={6}
-            spaceBetween={12}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
-          >
+          <SwiperContainer>
             {popularMovies.map((movie) => (
               <SwiperSlide key={movie.id}>
                 <div
@@ -104,37 +91,12 @@ export default function MovieByCategory() {
                 </div>
               </SwiperSlide>
             ))}
-          </Swiper>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            className="fixed inset-0 flex items-center justify-center"
-            overlayClassName="fixed inset-0 bg-black bg-opacity-25"
-          >
-            <div
-              onClick={closeModal}
-              className="absolute inset-0 cursor-pointer"
-            />
-            {selectedMovie && (
-              <div className="bg-neutral-900 rounded-xl max-w-xl w-full overflow-hidden z-10">
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${selectedMovie.backdrop_path}`}
-                  alt={selectedMovie.title}
-                  className="w-full h-72 bg-center"
-                />
-                <p className="text-neutral-400 px-6 mt-4">
-                  {selectedMovie.release_date}
-                </p>
-                <p className="text-2xl font-bold text-white p-6">
-                  {selectedMovie.title}
-                </p>
-                <p className="text-white px-6 pb-6 text-sm">
-                  평점 : {selectedMovie.vote_average}
-                </p>
-                <p className="text-white px-6 pb-6">{selectedMovie.overview}</p>
-              </div>
-            )}
-          </Modal>
+          </SwiperContainer>
+          <ModalContainer
+            modalIsOpen={modalIsOpen}
+            closeModal={closeModal}
+            selectedMovie={selectedMovie}
+          />
         </div>
       </div>
 
@@ -143,14 +105,7 @@ export default function MovieByCategory() {
           평점 높은 영화
         </h2>
         <div className="mx-14">
-          <Swiper
-            slidesPerView={6}
-            spaceBetween={12}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
+          <SwiperContainer
           >
             {topRatedMovies.map((movie) => (
               <SwiperSlide key={movie.id}>
@@ -167,37 +122,12 @@ export default function MovieByCategory() {
                 </div>
               </SwiperSlide>
             ))}
-          </Swiper>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            className="fixed inset-0 flex items-center justify-center"
-            overlayClassName="fixed inset-0 bg-black bg-opacity-25"
-          >
-            <div
-              onClick={closeModal}
-              className="absolute inset-0 cursor-pointer"
-            />
-            {selectedMovie && (
-              <div className="bg-neutral-900 rounded-xl max-w-xl w-full overflow-hidden z-10">
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${selectedMovie.backdrop_path}`}
-                  alt={selectedMovie.title}
-                  className="w-full h-72 bg-center"
-                />
-                <p className="text-neutral-400 px-6 mt-4">
-                  {selectedMovie.release_date}
-                </p>
-                <p className="text-2xl font-bold text-white p-6">
-                  {selectedMovie.title}
-                </p>
-                <p className="text-white px-6 pb-6 text-sm">
-                  평점 : {selectedMovie.vote_average}
-                </p>
-                <p className="text-white px-6 pb-6">{selectedMovie.overview}</p>
-              </div>
-            )}
-          </Modal>
+          </SwiperContainer>
+          <ModalContainer
+            modalIsOpen={modalIsOpen}
+            closeModal={closeModal}
+            selectedMovie={selectedMovie}
+          />
         </div>
       </div>
 
