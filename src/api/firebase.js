@@ -26,11 +26,10 @@ export async function login() {
       const user = res.user;
       return user;
     })
-    .catch((error) => console.log(error));
+    .catch((error) => console.error(error));
 }
 
 export async function logout() {
-  console.log("logout!");
   return signOut(auth).then(() => null);
 }
 

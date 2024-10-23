@@ -25,10 +25,6 @@ export default function HomePage() {
     fetchDisneyPlusMovies();
   }, []);
 
-  useEffect(() => {
-    console.log(movies);
-  }, [movies]);
-
   return (
     <>
       {movies && (

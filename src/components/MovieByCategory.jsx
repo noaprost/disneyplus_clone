@@ -49,10 +49,6 @@ export default function MovieByCategory() {
     fetchGenres();
   }, []);
 
-  useEffect(() => {
-    console.log(genres);
-  }, [genres]);
-
   const openModal = (movie) => {
     setSelectedMovie(movie);
     setModalIsOpen(true);
