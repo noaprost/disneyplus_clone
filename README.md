@@ -8,7 +8,7 @@
 
 **검색 화면**
 
-![DPSearch](https://github.com/user-attachments/assets/16dfc9a3-3a54-4464-aeb9-583ddffe4381)
+![DPSearch](https://github.com/user-attachments/assets/6de1d095-6fd6-46f2-9432-8e7d6abaecfd)
 
 ---
 
