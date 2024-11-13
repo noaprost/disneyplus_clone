@@ -1,12 +1,12 @@
-**로그인 화면**
+### **로그인 화면**
 
 <img src="https://github.com/user-attachments/assets/73535c5c-fde7-411a-be86-3b81804422f6" width="70%">
 
-**홈 화면**
+### **홈 화면**
 
 <img src="https://github.com/user-attachments/assets/0c68b6cb-f198-4a66-a2a4-bf8c3a7cd1c8" width="70%">
 
-**검색 화면**
+### **검색 화면**
 
 <img src="https://github.com/user-attachments/assets/6de1d095-6fd6-46f2-9432-8e7d6abaecfd" width="70%">
 
