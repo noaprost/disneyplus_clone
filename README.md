@@ -1,4 +1,4 @@
-**데모 페이지** : [Disney Plus Clone](https://disneyplus-phi.vercel.app/)
+**페이지** : [Disney Plus Clone](https://disneyplus-phi.vercel.app/)
 
 ---
 
