@@ -2,14 +2,17 @@ import axios from "../api/axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ModalContainer from "../components/ModalContainer";
+import useDebounce from "../hook/useDebounce";
 
 export default function SearchPage() {
   const param = useLocation();
-  const searchKeyword = decodeURIComponent(param.search.split("=")[1]);
+  const searchKeyword = decodeURIComponent(param.search.split("=")[1] || "");
   const [searchResults, setSearchResults] = useState(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  const debouncedSearchKeyword = useDebounce(searchKeyword, 500);
 
   const searchMovies = async (query) => {
     try {
@@ -27,8 +30,12 @@ export default function SearchPage() {
   };
 
   useEffect(() => {
-    searchMovies(searchKeyword);
-  }, [searchKeyword]);
+    if (debouncedSearchKeyword) {
+      searchMovies(debouncedSearchKeyword);
+    } else {
+      setSearchResults(null);
+    }
+  }, [debouncedSearchKeyword]);
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -44,7 +51,7 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen h-full">
       {searchResults && searchResults.length > 0 && (
         <>
           <div className="flex flex-wrap px-36 py-20">

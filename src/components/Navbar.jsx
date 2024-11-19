@@ -43,6 +43,8 @@ export default function Navbar() {
     setSearchTerm(value);
     if (value.trim() !== "") {
       navigator(`/search?query=${encodeURIComponent(value)}`);
+    } else {
+      navigator("/search");
     }
   };
 

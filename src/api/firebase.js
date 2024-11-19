@@ -17,11 +17,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
 
 // * Auth *
 export async function login() {
-  return signInWithPopup(auth, provider)
+  return signInWithPopup(auth, new GoogleAuthProvider())
     .then((res) => {
       const user = res.user;
       return user;
